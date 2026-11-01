@@ -15,17 +15,17 @@ bacen_focus_query = function(expectation_type, ..., format = 'json', sample_top 
   # ---------------------------------- #
   # --- Source Auxiliary Functions --- #
   # ---------------------------------- #
-  # if(source_github == TRUE){
-  #   tryCatch(expr = suppressWarnings(source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_API/main/bacen_focus_api.R')),
-  #            error= function(e){message('Não foi possível acessar a função Bacen_Focus_API')})
-  #   Sys.sleep(1.5)
-  #   
-  #   tryCatch(expr = suppressWarnings(source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_API/main/bacen_focus_url.R')),
-  #            error = function(e){message('Não foi possível acessar a função Bacen_Focus_URL')})
-  #   Sys.sleep(1.5)
-  # }
-  # 
-  # Sys.sleep(1.5)
+  if(source_github == TRUE){
+    tryCatch(expr = suppressWarnings(source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_API/main/bacen_focus_api.R')),
+             error= function(e){message('Não foi possível acessar a função Bacen_Focus_API')})
+    Sys.sleep(1.5)
+
+    tryCatch(expr = suppressWarnings(source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_API/main/bacen_focus_url.R')),
+             error = function(e){message('Não foi possível acessar a função Bacen_Focus_URL')})
+    Sys.sleep(1.5)
+  }
+
+  Sys.sleep(1.5)
   
   
   # ------------------------------ #
