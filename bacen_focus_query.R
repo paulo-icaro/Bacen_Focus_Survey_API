@@ -10,7 +10,7 @@ library(dplyr)
 # ============= #
 # === Query === #
 # ============= #
-bacen_focus_query = function(expectation_type, ..., format = 'json', sample_top = 10, sample_min = 1, fields = NULL, series_name = 'all'){
+bacen_focus_query = function(expectation_type, ..., format = 'json', sample_top = 10, sample_min = 1, fields = NULL, series_name = 'all', source_github = TRUE){
   
   # ---------------------------------- #
   # --- Source Auxiliary Functions --- #
