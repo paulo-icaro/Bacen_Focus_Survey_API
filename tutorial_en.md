@@ -296,7 +296,9 @@ source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/mai
 
 
 # --- Acessing API Data --- #
-bacen_focus_dataset = bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais', fields = 'Indicador,Data,DataReferencia,Mediana')
+bacen_focus_dataset = 
+  bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais',
+                    fields = 'Indicador,Data,DataReferencia,Mediana')
 head(bacen_focus_dataset, n = 10)
 ```
 
@@ -333,7 +335,13 @@ source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/mai
 
 
 # --- Acessing API Data --- #
-bacen_focus_dataset = bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais', DataReferencia == '1/2025',  Data > '2024-12-01', Data < '2024-12-15', Indicador %in% c('IPCA', 'PIB Toal'), fields = 'Indicador,Data,DataReferencia,Mediana')
+bacen_focus_dataset = 
+  bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais',
+                    DataReferencia == '1/2025',
+                    Data > '2024-12-01',
+                    Data < '2024-12-15',
+                    Indicador %in% c('IPCA', 'PIB Toal'),
+                    fields = 'Indicador,Data,DataReferencia,Mediana')
 bacen_focus_dataset
 ```
 
