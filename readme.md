@@ -24,6 +24,6 @@ nominal interest rates across different forecast horizons.\
 following:
 
       Readme - [English Tutorial](tutorial_en.md)\
-      Leiame - [Tutorial em Português](tutorial_pt_br.md)
+      Leiame - [Tutorial em Português](tutorial_pt.md)
 
 </p>

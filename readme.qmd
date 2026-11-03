@@ -1,0 +1,38 @@
+---
+title: "Guidethrough: Acessing Central Bank of Brazil's Focus Survey API"
+format: 
+  gfm: default
+  pdf:
+    pdf-engine: pdflatex
+    header-includes: 
+    - \usepackage{fvextra}
+    - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}, fontsize=\small}
+  
+    - \usepackage{tcolorbox}
+    - \newtcolorbox{functioncard}{
+        colback=red!5,
+        colframe=red!70!black,
+        arc=2mm,
+        boxrule=0.8pt}
+  html:
+    css: stylesheet.css
+  
+date: "2026-10-28"
+editor: source
+---
+
+
+
+<!----------->
+<!-- PART 1-->
+<!----------->
+## Guidethrough
+
+<p>
+|       The [**Focus Survey**]('https://www.bcb.gov.br/publicacoes/focus') is an important source of market expectations about Brazilian macroeconomic variables. The Central Bank of Brazil publishes a weekly report summarizing the expectations of financial institutions and analysts regarding the country's main economic indicators.
+|       This library allows researchers to access daily data on expectation for macroeconomic variables such as price indexes and nominal interest rates across different forecast horizons.
+|       Further details on how to extract the data are available in the following:
+
+|       Readme - [English Tutorial](tutorial_en.md)
+|       Leiame - [Tutorial em Português](tutorial_pt.md)
+</p>
