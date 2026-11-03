@@ -1,0 +1,26 @@
+<!------------------------------------------->
+<!--- Detalhamento Função Github Document --->
+<!------------------------------------------->
+:::{.content-visible when-format = 'gfm'}
+```r
+bacen_focus_query (expectation_type, ..., format, sample_top, sample_min, fields, series_name, source_github)
+```
+:::
+  
+<!------------------------------->
+<!--- Detalhamento Função PDF --->
+<!------------------------------->
+:::{.content-visible when-format = 'pdf'}
+\begin{functioncard}
+\texttt{$\textbf{bacen\_focus\_query} (expectation\_type, \dots, format, sample\_top, sample\_min, fields, series\_name, source\_github)$}
+\end{functioncard}
+:::
+  
+<!-------------------------------->
+<!--- Detalhamento Função HTML --->
+<!-------------------------------->
+:::{.content-visible when-format = 'html'}
+<div class = 'function_card'> 
+bacen_focus_url (expectation_type, ..., format, sample_top, sample_min, fields, series_name, source_github)
+</div>
+:::
