@@ -1,0 +1,227 @@
+---
+title: "Acessando dados do Boletim Focus do Banco Central do Brasil via API"
+format: 
+  gfm: default
+  pdf:
+    pdf-engine: pdflatex
+    header-includes: 
+    - \usepackage{fvextra}
+    - \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}, fontsize=\small}
+  
+    - \usepackage{tcolorbox}
+    - \newtcolorbox{functioncard}{
+        colback=red!5,
+        colframe=red!70!black,
+        arc=2mm,
+        boxrule=0.8pt}
+  html:
+    css: stylesheet.css
+  
+date: "2026-11-03"
+editor: source
+---
+
+
+<!------------>
+<!-- PARTE 1 -->
+<!------------>
+## Objetivo
+
+<p>
+|       Este tutorial mostra como extrair dados da API do Banco Central referente ao Boletim Focus. Os scripts [**bacen_focus_url**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R') and [**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R') são fundamentais para o processo de extração. A primeira função é responsável pela geração das os endereços URL onde os dados estão contidos. Já a outra função fica encarregada de realizar a conexão com a API, extrair as informações e convertê-las em um formato legível.
+|       Além disso, a função [**bacen_focus_query**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/blob/main/bacen_focus_query.R') combina as funcionalidades anteriores de modo a simplificar o processo de obtenção dos dados.
+|       As seções a seguir detalham o funcionamento de cada script.
+</p>
+
+
+
+<!------------>
+<!-- PART 2 -->
+<!------------>
+## Bacen Focus URL
+
+{{< include includes/bacen_focus_url.qmd >}}
+
+<p>
+|     Nesta função, o usuário precisa especificar alguns argumentos para criar a URL. São eles:
+- `expectation_type`: indica qual conjunto de dados você deseja acessar^[A API Focus Survey possui os seguintes tipos de expectativa, cada um correspondendo a um horizonte ou nível de detalhamento de dados diferente: `ExpectativaMercadoMensais`, `ExpectativasMercadoSelic`, `ExpectativasMercadoTrimestrais`, `ExpectativasMercadoAnuais`, `ExpectativasMercadoInflacao12Meses`, `ExpectativasMercadoInflacao24Meses`, `ExpectativasMercadoTop5Mensais`, `ExpectativasMercadoTop5Selic`, `ExpectativaMercadoTop5Trimestral`, `ExpectativasMercadoTop5Anuais`, `ExpectativasMercadoTop5Inflacao12Meses`, `ExpectativasMercadoTop5Inflacao24Meses`. Clique [aqui]('https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/aplicacao#!/recursos') para mais detalhes.];
+- `format`: `json` é o formato mais comum. Outros formatos disponíveis são: `xml`, `csv` e `html`;
+- `sample_top`: representa a quantidade de projeções para cada entidade^[Uma entidade é uma combinação de dados definida com base nos campos (`fields`) selecionados.];
+- `sample_min`: o índice da primeira entidade a ser coletada;
+- `fields` (*opcional*): permite selecionar as variáveis do conjunto de dados que você deseja obter. Caso nenhum argumento seja especificado, todas as variáveis^[Cada `expectation_type` possui suas próprias variáveis.] disponíveis serão baixadas.
+
+|       Neste exemplo, suponha que desejamos recuperar o conjunto de dados de expectativas trimestrais:
+</p>
+
+```{r}
+#| label: Bacen_Focus_URL
+#| echo: TRUE
+#| messag: FALSE
+#| warning: FALSE
+#| comment: ''
+#| eval: TRUE
+
+# -------------------------------- #
+# --- Examplo - Geração da URL --- #
+# -------------------------------- #
+
+# --- Função Bacen_Focus_URL --- #
+source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R') 
+
+# --- Criar URL --- #
+bacen_focus_quartely_url = 
+  bacen_focus_url(expectation_type = 'ExpectativasMercadoTrimestrais',
+                  format = 'json',
+                  sample_top = 10,
+                  sample_min = 0,
+                  fields = NULL)
+bacen_focus_quartely_url
+```
+
+
+
+<!-------------->
+<!--- PARTE 3 --->
+<!-------------->
+## Bacen_Focus_API
+
+{{< include includes/bacen_focus_api.qmd >}}
+
+
+<p>
+|       É bem simples utilizar a função. O usuário precisa apenas especificar os seguintes argumentos:
+- `url`: a URL criada anteriormente pela função **bacen_focus_url**;
+- `use_httr`: escolha entre as funções [*httr*](https://httr.r-lib.org/) ou [*httr2*](https://httr2.r-lib.org/);
+- `extra_attempts`: em caso de falha na conexão, informe quantas tentativas adicionais de conexão você deseja;
+
+|       Vejamos como obter o conjunto de dados trimestrais a partir da URL gerada anteriormente:
+</p>
+
+```{r}
+#| label: Bacen_Focus_API
+#| echo: TRUE
+#| messag: FALSE
+#| warning: FALSE
+#| comment: ''
+#| eval: TRUE
+
+# ----------------------------------- #
+# --- Examplo - Conexão com a API --- #
+# ----------------------------------- #
+
+# --- Função Bacen Focus API --- #
+source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R')
+
+# --- URL --- #
+focus_url = 'https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/odata/ExpectativasMercadoTrimestrais?top=10$skip=-1&$format=json'
+
+# --- Obtendo dados da API --- #
+bacen_focus_dataset = bacen_focus_api(url = focus_url, use_httr = TRUE)
+head(bacen_focus_dataset, n = 10)
+```
+
+
+
+<!--------------->
+<!--- PARTE 4 --->
+<!--------------->
+## Bacen_Focus_Query
+
+{{< include includes/bacen_focus_query.qmd >}}
+
+<p>
+|       A função [**bacen_focus_query**]('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R') combina as duas funções descritas anteriormente. No entanto, ela traz algumas melhorias.
+|       Primeiro, alguns argumentos básicos não precisam ser especificados, uma vez que `format`, `sample_top`, `sample_min` e `fields` já vêm predefinidos. Além disso, `series_name` é um novo argumento que permite filtrar os dados, selecionando apenas as variáveis desejadas.
+|       Adicionalmente, o uso de reticências (`...`) possibilita consultas mais refinadas, permitindo a inclusão de filtros extras. O argumento `source_github` define se as funções [**bacen_focus_url**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R') e [**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R') devem ser acessadas diretamente a partir deste repositório no GitHub.
+|       Os filtros fornecidos por meio de (`...`) devem ser compatíveis com os dados obtidos no processo de extração.
+
+|       Cada exemplo abaixo representa um processo de extração com uma especificação de consulta diferente. Vamos conferir:
+
+#### Apenas `expectation_type` é especificado
+
+|       Neste caso, todos os dados são recuperados.
+</p>
+
+```{r}
+#| label: Bacen_Focus_Query - Query A
+#| echo: TRUE
+#| messag: FALSE
+#| warning: FALSE
+#| comment: ''
+#| eval: TRUE
+
+# ------------------------- #
+# --- Extração de Dados --- #
+# ------------------------- #
+
+# --- Função Bacen Focus API --- #
+source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
+
+
+# --- Coletando dados da API --- #
+bacen_focus_dataset = bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais')
+head(bacen_focus_dataset, n = 10)
+```
+
+### Campos também informados
+
+<p>
+|       Neste caso, selecionamos apenas o índice, a data da pesquisa, a data de referência e a mediana.
+</p>
+
+```{r}
+#| label: Bacen_Focus_Query - Query B
+#| echo: TRUE
+#| messag: FALSE
+#| warning: FALSE
+#| comment: ''
+#| eval: TRUE
+
+# ------------------------- #
+# --- Extração de Dados --- #
+# ------------------------- #
+
+# --- Função Bacen Focus API --- #
+source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
+
+
+# --- Coletando dados da API --- #
+bacen_focus_dataset = 
+  bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais',
+                    fields = 'Indicador,Data,DataReferencia,Mediana')
+head(bacen_focus_dataset, n = 10)
+```
+
+
+### Filtragem adicional na consulta
+
+<p>
+|       Suponha que nos interessem apenas as previsões para o primeiro trimestre de 2025 referentes ao IPCA (índice de preços ao consumidor) e à taxa de câmbio do Brasil. Além disso, essas previsões foram feitas entre o dia primeiro e 15 de dezembro.
+</p>
+
+```{r}
+#| label: Bacen_Focus_Query - Query C
+#| echo: TRUE
+#| messag: FALSE
+#| warning: FALSE
+#| comment: ''
+#| eval: TRUE
+
+# ----------------------- #
+# --- Data Extraction --- #
+# ----------------------- #
+
+# --- Função Bacen Focus API --- #
+source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
+
+
+# --- Coletando dados da API --- #
+bacen_focus_dataset = 
+  bacen_focus_query(expectation_type = 'ExpectativasMercadoTrimestrais',
+                    DataReferencia == '1/2025',
+                    Data > '2024-12-01',
+                    Data < '2024-12-15',
+                    Indicador %in% c('IPCA', 'PIB Toal'),
+                    fields = 'Indicador,Data,DataReferencia,Mediana')
+bacen_focus_dataset
+```
