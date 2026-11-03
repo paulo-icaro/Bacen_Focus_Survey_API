@@ -21,7 +21,7 @@ The first script generates the respective URL address while the latter
 connects with the API, extracts the info required and converts it to a
 readable format.\
       On top of that, the
-[**bacen_query**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/blob/main/bacen_focus_query.R')
+[**bacen_focus_query**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/blob/main/bacen_focus_query.R')
 function combines the both previous functions into a single interface,
 simplifying the data retrieval process.\
       The following sections describe how each function works.
@@ -135,8 +135,8 @@ following arguments:
 - `url`: the URL previously created by the **bacen_focus_url** function;
 - `use_httr`: choose between the [*httr*](https://httr.r-lib.org/) or
   [*httr2*](https://httr2.r-lib.org/) functions;
-- `extra_attempts`: in case of missed connection, inform how many
-  connections attempts you want;
+- `extra_attempts`: in case of missed connection, inform how many extra
+  connection attempts you want;
 
       Let’s get the quartely dataset from the previous url:
 
@@ -379,6 +379,6 @@ bacen_focus_dataset
     [here]('https://olinda.bcb.gov.br/olinda/servico/Expectativas/versao/v1/aplicacao#!/recursos')
     for more details.
 
-[^2]: Data combination based on fields argument.
+[^2]: Entity is a data combination based on fields argument.
 
 [^3]: Each `expectation_type` has its own variables.
