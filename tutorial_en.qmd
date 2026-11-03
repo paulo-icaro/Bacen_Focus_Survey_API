@@ -1,5 +1,5 @@
 ---
-title: "Extracting Focus Survey Data via API"
+title: "Extracting Focus Survey data via API"
 format: 
   gfm: default
   pdf:
@@ -28,7 +28,7 @@ editor: source
 ## Purpose
 
 <p>
-|       This tutorial shows how to extract the Focus Survey data from the Central Bank of Brazil's API. Two R scripts, which are [**bacen_focus_url**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R') and [**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R'). The first script generates the respective URL address while the latter connects with the API, extracts the info required and converts it to a readable format.
+|       This tutorial shows how to extract the Focus Survey data from the Central Bank of Brazil's API. The scripts  [**bacen_focus_url**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R') and [**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R') are the core for the extraction process. The first script generates the respective URL address while the latter connects with the API, extracts the info required and converts it to a readable format.
 |       On top of that, the [**bacen_focus_query**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/blob/main/bacen_focus_query.R') function combines the both previous functions into a single interface, simplifying the data retrieval process.
 |       The following sections describe how each function works.
 </p>
@@ -109,7 +109,7 @@ bacen_focus_quartely_url
 # --- Example - API Connection --- #
 # -------------------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R')
 
 # --- URL --- #
@@ -129,7 +129,6 @@ head(bacen_focus_dataset, n = 10)
 ## Bacen_Focus_Query
 
 {{< include includes/bacen_focus_query.qmd >}}
-
 
 <p>
 |       The [**bacen_focus_query**]('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R') combines the two previously described functions. However, it introduces a few improvements. 
@@ -156,7 +155,7 @@ head(bacen_focus_dataset, n = 10)
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 
@@ -183,7 +182,7 @@ head(bacen_focus_dataset, n = 10)
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 
@@ -213,7 +212,7 @@ head(bacen_focus_dataset, n = 10)
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 

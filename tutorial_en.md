@@ -1,4 +1,4 @@
-# Extracting Focus Survey Data via API
+# Extracting Focus Survey data via API
 
 2026-10-28
 
@@ -13,13 +13,13 @@
 <p>
 
       This tutorial shows how to extract the Focus Survey data from the
-Central Bank of Brazil’s API. Two R scripts, which are
+Central Bank of Brazil’s API. The scripts
 [**bacen_focus_url**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_url.R')
 and
-[**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R').
-The first script generates the respective URL address while the latter
-connects with the API, extracts the info required and converts it to a
-readable format.\
+[**bacen_focus_api**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R')
+are the core for the extraction process. The first script generates the
+respective URL address while the latter connects with the API, extracts
+the info required and converts it to a readable format.\
       On top of that, the
 [**bacen_focus_query**]('https://github.com/paulo-icaro/Bacen_Focus_Survey_API/blob/main/bacen_focus_query.R')
 function combines the both previous functions into a single interface,
@@ -147,7 +147,7 @@ following arguments:
 # --- Example - API Connection --- #
 # -------------------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_api.R')
 
 # --- URL --- #
@@ -245,7 +245,7 @@ query specification. Let’s take a look:
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 
@@ -291,7 +291,7 @@ date, and median..
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 
@@ -330,7 +330,7 @@ December 15.
 # --- Data Extraction --- #
 # ----------------------- #
 
-# --- Bacen API Function --- #
+# --- Bacen Focus API Function --- #
 source('https://raw.githubusercontent.com/paulo-icaro/Bacen_Focus_Survey_API/main/bacen_focus_query.R')
 
 
