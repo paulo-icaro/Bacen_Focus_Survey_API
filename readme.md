@@ -23,7 +23,7 @@ nominal interest rates across different forecast horizons.\
       Further details on how to extract the data are available in the
 following:
 
-      Readme - [English Tutorial](tutorial_en.md)\
-      Leiame - [Tutorial em Português](tutorial_pt.md)
+      Readme - [English Tutorial](notes/tutorial_en.md)\
+      Leiame - [Tutorial em Português](notes/tutorial_pt.md)
 
 </p>
